@@ -18,6 +18,7 @@ jobs:
   scan-dependencies:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: check dependencies
         uses: pypa/gh-action-pip-audit@v1.0.8
         with:
@@ -26,6 +27,7 @@ jobs:
   scan-dockerfile-and-build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Build and scan image
         uses: dentsusoken/build-and-scan-image@main
         with:
