@@ -4,7 +4,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  scan:
+  scan-git:
     name: security
     runs-on: ubuntu-latest
     steps:
@@ -15,11 +15,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  scan-dependencies:
+    runs-on: ubuntu-latest
+    steps:
       - name: check dependencies
         uses: pypa/gh-action-pip-audit@v1.0.8
         with:
           inputs: requirements.txt
 
+  scan-dockerfile-and-build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build and scan image
         uses: dentsusoken/build-and-scan-image@main
         with:
