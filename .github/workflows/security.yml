@@ -25,3 +25,6 @@ jobs:
         with:
           tag: "oraharon/weatherapp_github_actions:${{github.run_number}}"
           path: "."
+          hadolint-severity: info
+          dockle-severity: WARN
+          snyk-severity: low
