@@ -19,3 +19,9 @@ jobs:
         uses: pypa/gh-action-pip-audit@v1.0.8
         with:
           inputs: requirements.txt
+
+      - name: Build and scan image
+        uses: dentsusoken/build-and-scan-image@main
+        with:
+          tag: "oraharon/weatherapp_github_actions:${{github.run_number}}"
+          path: "."
