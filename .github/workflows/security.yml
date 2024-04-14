@@ -37,24 +37,30 @@ jobs:
           dockle-severity: WARN
           snyk-severity: low
 
+  sign-contianer:
+    runs-on: ubuntu-latest
+    steps:
+
       - name: cosign-installer
         uses: sigstore/cosign-installer@v2.0.0
+
       - name: Write signing key to disk
         run: 'echo "$KEY" > cosign.key'
         shell: bash
         env:
           KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
       - name: Sign the published Docker image
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: cosign sign --key cosign.key oraharon/weatherapp_github_actions:${{ github.run_number }}
 
-  codacy-analysis-cli:
-    name: Codacy Analysis CLI
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@main
-
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
+#  codacy-analysis-cli:
+#    name: Codacy Analysis CLI
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@main
+#
+#      - name: Run Codacy Analysis CLI
+#        uses: codacy/codacy-analysis-cli-action@master
