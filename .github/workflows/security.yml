@@ -15,8 +15,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@v3
-      - name: install
+      - name: check dependencies
         uses: pypa/gh-action-pip-audit@v1.0.8
         with:
           inputs: requirements.txt
