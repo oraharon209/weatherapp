@@ -15,9 +15,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  selftest:
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v3
       - name: install
         uses: pypa/gh-action-pip-audit@v1.0.8
