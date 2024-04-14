@@ -21,6 +21,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: install
         run: |
-          - ls
-          - python -m pip install .
+          ls
+          python -m pip install .
       - uses: pypa/gh-action-pip-audit@v1.0.8
