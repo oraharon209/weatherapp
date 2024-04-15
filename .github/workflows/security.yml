@@ -61,7 +61,7 @@ jobs:
         env:
           KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
 
-      - name: Sign the published Docker image
+      - name: Sign the published Docker image to dockerhub
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: cosign sign --key cosign.key docker.io/${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
