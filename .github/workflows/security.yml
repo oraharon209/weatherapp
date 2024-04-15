@@ -25,7 +25,6 @@ jobs:
           inputs: requirements.txt
 
   codacy-analysis-cli:
-    needs: scan-dockerfile-and-build
     name: Codacy Analysis CLI
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +49,7 @@ jobs:
           snyk-severity: low
 
   sign-container:
-    needs: codacy-analysis-cli
+    needs: scan-dockerfile-and-build
     name: Sign container with cosign
     runs-on: ubuntu-latest
     steps:
