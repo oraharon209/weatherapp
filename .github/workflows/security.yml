@@ -16,6 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   scan-dependencies:
+    needs: scan-git
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,6 +26,7 @@ jobs:
           inputs: requirements.txt
 
   scan-dockerfile-and-build:
+    needs: scan-dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -43,13 +45,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{github.run_number}}
+      - name: Push
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{github.run_number}}
 
       - name: cosign-installer
         uses: sigstore/cosign-installer@v3.5.0
@@ -65,12 +62,14 @@ jobs:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: cosign sign --key cosign.key ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }} -y
 
-#  codacy-analysis-cli:
-#    name: Codacy Analysis CLI
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@main
-#
-#      - name: Run Codacy Analysis CLI
-#        uses: codacy/codacy-analysis-cli-action@master
+  codacy-analysis-cli:
+    needs: scan-dockerfile-and-build
+    name: Codacy Analysis CLI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
+
