@@ -62,10 +62,6 @@ jobs:
     name: Sign container with cosign
     runs-on: ubuntu-latest
     steps:
-
-      - name: Push
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{github.run_number}}
-
       - name: cosign-installer
         uses: sigstore/cosign-installer@v3.5.0
 
