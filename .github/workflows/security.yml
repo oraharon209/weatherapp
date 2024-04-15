@@ -90,4 +90,4 @@ jobs:
           KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
 
       - name: Verify the published Docker image
-          run: cosign verify --key cosign.key ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
+        run: cosign verify --key cosign.key ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
