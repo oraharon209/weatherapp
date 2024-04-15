@@ -64,7 +64,7 @@ jobs:
       - name: Sign the published Docker image to dockerhub
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-        run: cosign sign --key cosign.key ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
+        run: cosign sign --key cosign.key ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
 
 #  codacy-analysis-cli:
 #    name: Codacy Analysis CLI
