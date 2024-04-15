@@ -66,7 +66,7 @@ jobs:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: |
           ls
-          cosign sign --key cosign.key ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
+          cosign sign --key cosign.key dockerhub/${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{ github.run_number }}
 
 #  codacy-analysis-cli:
 #    name: Codacy Analysis CLI
