@@ -52,7 +52,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/weatherapp_github_actions:${{github.run_number}}
 
       - name: cosign-installer
-        uses: sigstore/cosign-installer@v2.0.0
+        uses: sigstore/cosign-installer@v3.5.0
 
       - name: Write signing key to disk
         run: 'echo "$KEY" > cosign.key'
