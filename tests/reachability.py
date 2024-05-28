@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 def test_site_up():
     print("Running test_site_up...")
@@ -14,7 +15,7 @@ def test_connection():
     print("Status Code:", status_code)
     assert status_code in range(200, 400)
 
-
 if __name__ == '__main__':
-  test_site_up()
-  test_connection()
+    time.sleep(5)  # Add a short sleep to ensure the service has time to start
+    test_site_up()
+    test_connection()
