@@ -15,7 +15,7 @@ jobs:
 
       - run:
           name: Start Docker container
-          command: docker run -d -p 9090:9090 weatherapp
+          command: docker run -d -p 9090:9090 --name weatherapp_container weatherapp
 
       - run:
           name: Wait for the service to start
@@ -25,6 +25,10 @@ jobs:
               echo "Waiting for service to start..."
               sleep 3
             done
+
+      - run:
+          name: Check Docker container logs
+          command: docker logs weatherapp_container
 
       - run:
           name: Run Tests
