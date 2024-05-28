@@ -8,26 +8,17 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.7  # Ensure a compatible Docker version
-          docker_layer_caching: true
 
       - run:
           name: Build Docker image
           command: docker build -t weatherapp .
 
       - run:
-          name: Create Docker network
-          command: docker network create weatherapp_network
-
-      - run:
           name: Start Docker container
-          command: docker run -d --network weatherapp_network --name weatherapp_container weatherapp
-
-      - run:
-          name: Start Test Container
-          command: docker run --rm --network weatherapp_network busybox sh -c "until wget -qO- http://weatherapp_container:9090; do echo 'Waiting for weatherapp_container to start...'; sleep 3; done"
+          command: docker run -d  --name weatherapp_container weatherapp
 
       - run:
           name: Run Tests
           command: |
-            python tests/reachability.py
+            docker exec -it weatherapp_container python tests/reachability.py
+
