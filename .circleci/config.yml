@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Run simple test
           command: |
-            python tests/reachability_test.py
+            python tests/reachability.py
 
 # # Workflow to orchestrate job execution
 # workflows:
