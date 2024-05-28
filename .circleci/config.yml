@@ -32,7 +32,9 @@ jobs:
 
       - run:
           name: Login to GitLab Registry
-          command: echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com/or4153322/weatherapp
+          command: |
+            echo "Logging in to GitLab Registry..."
+            docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
       - run:
           name: Push Docker image to GitLab Registry
