@@ -26,6 +26,18 @@ jobs:
           name: Run Tests
           command: docker exec weatherapp_container python tests/reachability.py
 
+      - run:
+          name: Tag Docker image for GitLab Registry
+          command: docker tag weatherapp registry.gitlab.com/or4153322/weatherapp:$CI_PIPELINE_ID
+
+      - run:
+          name: Login to GitLab Registry
+          command: echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com/or4153322/weatherapp
+
+      - run:
+          name: Push Docker image to GitLab Registry
+          command: docker push registry.gitlab.com/or4153322/weatherapp:$CI_PIPELINE_ID
+
       - discord/status:
           fail_only: false
           failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
