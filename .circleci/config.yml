@@ -21,4 +21,4 @@ jobs:
 
       - run:
           name: Run Tests
-          command: docker exec weatherapp_container ping 127.0.0.1
+          command: docker exec weatherapp_container python tests/reachability.py

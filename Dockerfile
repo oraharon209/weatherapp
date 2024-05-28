@@ -3,6 +3,9 @@ FROM python:3.9-alpine
 # Create a new user
 RUN adduser --disabled-password oraharon
 
+# Install curl
+RUN apt-get update && apt-get install -y curl
+
 # Set the working directory
 WORKDIR /weatherapp
 
