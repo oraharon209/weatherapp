@@ -24,32 +24,10 @@ jobs:
           command: docker run -d --network weatherapp_network --name weatherapp_container weatherapp
 
       - run:
-          name: Wait for the service to start
-          command: |
-            WEATHERAPP_IP=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' weatherapp_container)
-            echo "Container IP: $WEATHERAPP_IP"
-            for i in `seq 1 10`; do
-              if curl -s http://$WEATHERAPP_IP:9090; then
-                echo "Service is up!"
-                break
-              else
-                echo "Waiting for service to start... attempt $i"
-                sleep 3
-              fi
-            done
-            if [ $i -eq 10 ]; then
-              echo "Service did not start in time. Here are the container logs:"
-              docker logs weatherapp_container
-              exit 1
-            fi
-
-      - run:
-          name: Check Docker container logs
-          command: docker logs weatherapp_container
+          name: Start Test Container
+          command: docker run --rm --network weatherapp_network busybox sh -c "until wget -qO- http://weatherapp_container:9090; do echo 'Waiting for weatherapp_container to start...'; sleep 3; done"
 
       - run:
           name: Run Tests
           command: |
-            WEATHERAPP_IP=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' weatherapp_container)
-            export WEATHERAPP_IP
             python tests/reachability.py
