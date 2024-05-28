@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Run simple test
           command: |
-            docker run weatherapp -p 9090:9090
+            docker run -d -p 9090:9090 weatherapp
             python tests/reachability.py
 
 # # Workflow to orchestrate job execution
