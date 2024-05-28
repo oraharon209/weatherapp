@@ -13,3 +13,8 @@ def test_connection():
     status_code = int(str(output).split(" ")[1])
     print("Status Code:", status_code)
     assert status_code in range(200, 400)
+
+
+if __name__ == '__main__':
+  test_site_up()
+  test_connection()
