@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: Tag Docker image for GitLab Registry
-          command: docker tag weatherapp registry.gitlab.com/or4153322/weatherapp:$CI_PIPELINE_ID
+          command: docker tag weatherapp registry.gitlab.com/or4153322/weatherapp:$CIRCLE_BUILD_NUM
 
       - run:
           name: Login to GitLab Registry
@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Push Docker image to GitLab Registry
-          command: docker push registry.gitlab.com/or4153322/weatherapp:$CI_PIPELINE_ID
+          command: docker push registry.gitlab.com/or4153322/weatherapp:$CIRCLE_BUILD_NUM
 
       - discord/status:
           fail_only: false
