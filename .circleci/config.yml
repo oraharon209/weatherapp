@@ -21,7 +21,7 @@ jobs:
 
       - run:
           name: Wait for container to start
-          command: docker logs -f weatherapp_container | grep "Application started" -m 1
+          command: docker logs -f weatherapp_container | grep "Application started" -s 15
 
       - run:
           name: Run Tests
