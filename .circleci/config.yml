@@ -30,7 +30,6 @@ jobs:
             for i in `seq 1 10`; do
               curl http://$WEATHERAPP_IP:9090 && break
               echo "Waiting for service to start..."
-              sleep 3
             done
 
       - run:
