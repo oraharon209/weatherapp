@@ -29,7 +29,7 @@ jobs:
       - discord/notify:
           color: '4383476'
           mentions: or.aharon
-          message: This is a custom message notification
+          message: This is a custom message notificatin
           webhook: https://discord.com/api/webhooks/1244981576555827260/zrUbDLPpZLNoi7bYFxtBzFUqqD1dT8s_8oQ3vOpJToNaIWFVIKDiR4pfA50F-LErzKyW
 
 workflows:
