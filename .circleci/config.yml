@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  discord: teka23/discord@0.0.1
+  discord: antonioned/discord@0.1.0
 
 jobs:
   build:
@@ -26,10 +26,10 @@ jobs:
           name: Run Tests
           command: docker exec weatherapp_container python tests/reachability.py
 
-      - discord/notify:
-          color: '4383476'
-          mentions: or.aharon
-          message: This is a custom message notificatin
+      - discord/status:
+          fail_only: false
+          failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+          success_message: "**${CIRCLE_USERNAME}** deployed api to prod."
           webhook: https://discord.com/api/webhooks/1244981576555827260/zrUbDLPpZLNoi7bYFxtBzFUqqD1dT8s_8oQ3vOpJToNaIWFVIKDiR4pfA50F-LErzKyW
 
 workflows:
