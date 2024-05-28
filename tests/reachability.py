@@ -1,10 +1,13 @@
+import os
 import subprocess
 import time
+
+WEATHERAPP_IP = os.getenv('WEATHERAPP_IP', '127.0.0.1')
 
 def test_site_up():
     print("Running test_site_up...")
     try:
-        output = subprocess.check_output("curl http://127.0.0.1:9090 --max-time 3", shell=True)
+        output = subprocess.check_output(f"curl http://{WEATHERAPP_IP}:9090 --max-time 3", shell=True)
         print("Output:", output)
         assert "Failed" not in str(output)
     except subprocess.CalledProcessError as e:
@@ -14,7 +17,7 @@ def test_site_up():
 def test_connection():
     print("Running test_connection...")
     try:
-        output = subprocess.check_output("curl --include http://127.0.0.1:9090", shell=True)
+        output = subprocess.check_output(f"curl --include http://{WEATHERAPP_IP}:9090", shell=True)
         print("Output:", output)
         status_code = int(str(output).split(" ")[1])
         print("Status Code:", status_code)
