@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Login to GitLab Registry
           command: |
-            echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
+            echo "$GITLAB_TOKEN" | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
 
       - run:
           name: Push Docker image to GitLab Registry
