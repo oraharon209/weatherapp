@@ -20,9 +20,5 @@ jobs:
           command: docker run -d --name weatherapp_container weatherapp
 
       - run:
-          name: Wait for container to start
-          command: docker logs -f weatherapp_container | grep "Application started" -s 15
-
-      - run:
           name: Run Tests
           command: docker exec weatherapp_container python tests/reachability.py
