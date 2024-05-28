@@ -28,6 +28,6 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            WEATHERAPP_IP=$(docker inspect -f '{{range .NetworkSettings.Networks.weatherapp_network}}{{.IPAddress}}{{end}}' weatherapp_container)
+            WEATHERAPP_IP=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' weatherapp_container)
             export WEATHERAPP_IP
             python tests/reachability.py
